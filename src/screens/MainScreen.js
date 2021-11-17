@@ -13,11 +13,15 @@ export const MainScreen = ({navigation}) => {
     })
   }
 
+  const toggleDrawerHandler = () =>{
+    navigation.toggleDrawer()
+  }
+
   useEffect(() => {
     navigation.setOptions({
       headerTitle: 'List',
       headerRight: () => <HeaderRightButtons/>,
-      headerLeft: () => <HeaderLeftButtons/>
+      headerLeft: () => <HeaderLeftButtons openDrawer={toggleDrawerHandler}/>
     })
   }, [])
 

@@ -12,10 +12,14 @@ export const BookedScreen = ({navigation}) => {
     })
   }
 
+  const toggleDrawerHandler = () =>{
+    navigation.toggleDrawer()
+  }
+
   useEffect(() => {
     navigation.setOptions({
       headerTitle: 'Favorite',
-      headerLeft: () => <HeaderLeftButtons/>
+      headerLeft: () => <HeaderLeftButtons openDrawer={toggleDrawerHandler}/>
     })
   }, [])
 
