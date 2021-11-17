@@ -8,7 +8,7 @@ import {AppHeaderIcon} from '../components/AppHeaderIcon'
 
 export const MainScreen = ({navigation}) => {
   const openPostHandler = (post) => {
-    navigation.navigate('Post', {
+    navigation.navigate('PostStack', {
       postId: post.id,
       date: post.date,
       // booked: post.booked
