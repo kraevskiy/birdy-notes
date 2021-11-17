@@ -1,7 +1,12 @@
 import React, {useEffect} from 'react'
 import {StyleSheet, View, Text} from 'react-native'
 
-export const PostScreen = () => {
+export const PostScreen = ({navigation, route}) => {
+  const params = route.params
+
+  useEffect(() => {
+    navigation.setOptions({title: `Post: ${params.postId} on ${new Date(params.date).toLocaleDateString()}`})
+  }, [])
 
   return (
     <View style={styles.center}>
