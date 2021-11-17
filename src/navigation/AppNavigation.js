@@ -2,17 +2,19 @@ import React from 'react'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
+import {Platform} from 'react-native'
 
 import {MainScreen} from '../screens/MainScreen'
 import {PostScreen} from '../screens/PostScreen'
 import {AboutScreen} from '../screens/AboutScreen'
 import {BookedScreen} from '../screens/BookedScreen'
 import {CreateScreen} from '../screens/CreateScreen'
-import {stackOptions, tabBookedOption, tabMainOption} from './navigation.options'
+import {stackOptions, tabBookedOption, tabMainOption, tabOptions} from './navigation.options'
 import {THEME} from '../theme'
 
 const Stack = createStackNavigator()
-const BottomTab = createBottomTabNavigator();
+const BottomTab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
 
 const MainStackNavigator = () => (
   <Stack.Navigator
@@ -34,9 +36,7 @@ export function AppNavigation() {
   return (
     <NavigationContainer>
       <BottomTab.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
+       {...tabOptions()}
       >
         <BottomTab.Screen
           name="MainTab"

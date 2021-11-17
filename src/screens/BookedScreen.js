@@ -1,20 +1,26 @@
-import React from 'react'
-import {StyleSheet, View, Text} from 'react-native'
+import React, {useEffect} from 'react'
 
-export const BookedScreen = () => {
+import {DATA} from '../data'
+import {PostList} from '../components/PostList'
+import {HeaderLeftButtons} from '../components/HeaderLeftButton'
+
+export const BookedScreen = ({navigation}) => {
+  const openPostHandler = (post) => {
+    navigation.navigate('PostStack', {
+      postId: post.id,
+      date: post.date,
+    })
+  }
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: 'Favorite',
+      headerLeft: () => <HeaderLeftButtons/>
+    })
+  }, [])
+
   return (
-    <View style={styles.center}>
-      <Text>
-        BookedScreen
-      </Text>
-    </View>
-  );
+    <PostList data={DATA.filter(post => post.booked)} onOpen={openPostHandler}/>
+  )
 };
 
-const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
