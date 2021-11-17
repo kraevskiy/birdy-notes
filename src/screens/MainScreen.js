@@ -19,7 +19,7 @@ export const MainScreen = ({navigation}) => {
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: 'List',
+      headerTitle: 'All posts',
       headerRight: () => <HeaderRightButtons/>,
       headerLeft: () => <HeaderLeftButtons openDrawer={toggleDrawerHandler}/>
     })

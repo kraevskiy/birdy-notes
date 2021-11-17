@@ -18,7 +18,7 @@ export const BookedScreen = ({navigation}) => {
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: 'Favorite',
+      headerTitle: 'Favorite posts',
       headerLeft: () => <HeaderLeftButtons openDrawer={toggleDrawerHandler}/>
     })
   }, [])

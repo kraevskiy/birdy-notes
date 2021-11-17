@@ -6,7 +6,14 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import {createDrawerNavigator} from '@react-navigation/drawer'
 import {Platform} from 'react-native'
 
-import {stackOptions, tabBookedOption, tabMainOption, tabOptions} from './navigation.options'
+import {
+  drawerAboutScreenOptions, drawerCreateScreenOptions,
+  drawerNavigatorOptions, drawerPostScreenOptions,
+  stackNavigatorOptions,
+  tabBookedScreenOption,
+  tabMainScreenOption,
+  tabNavigatorOptions
+} from './navigation.options'
 import {MainScreen} from '../screens/MainScreen'
 import {PostScreen} from '../screens/PostScreen'
 import {BookedScreen} from '../screens/BookedScreen'
@@ -19,21 +26,21 @@ const Drawer = createDrawerNavigator();
 
 const AboutStackNavigator = () => (
   <Stack.Navigator
-    screenOptions={stackOptions}>
+    screenOptions={stackNavigatorOptions}>
     <Stack.Screen name="AboutStack" component={AboutScreen}/>
   </Stack.Navigator>
 )
 
 const CreateStackNavigator = () => (
   <Stack.Navigator
-    screenOptions={stackOptions}>
+    screenOptions={stackNavigatorOptions}>
     <Stack.Screen name="CreateStack" component={CreateScreen}/>
   </Stack.Navigator>
 )
 
 const MainStackNavigator = () => (
   <Stack.Navigator
-    screenOptions={stackOptions}>
+    screenOptions={stackNavigatorOptions}>
     <Stack.Screen name="MainStack" component={MainScreen}/>
     <Stack.Screen name="PostStack" component={PostScreen}/>
   </Stack.Navigator>
@@ -41,7 +48,7 @@ const MainStackNavigator = () => (
 
 const BookedStackNavigator = () => (
   <Stack.Navigator
-    screenOptions={stackOptions}>
+    screenOptions={stackNavigatorOptions}>
     <Stack.Screen name="BookedStack" component={BookedScreen}/>
     <Stack.Screen name="PostStack" component={PostScreen}/>
   </Stack.Navigator>
@@ -49,17 +56,17 @@ const BookedStackNavigator = () => (
 
 const TabsNavigator = () => (
   <BottomTab.Navigator
-    {...tabOptions()}
+    {...tabNavigatorOptions()}
   >
     <BottomTab.Screen
-      name="MainTab"
+      name="All posts"
       component={MainStackNavigator}
-      options={tabMainOption}
+      options={tabMainScreenOption}
     />
     <BottomTab.Screen
-      name="BookedTab"
+      name="Favorite posts"
       component={BookedStackNavigator}
-      options={tabBookedOption}
+      options={tabBookedScreenOption}
     />
   </BottomTab.Navigator>
 )
@@ -68,19 +75,22 @@ export function AppNavigation() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        screenOptions={tabOptions()}
+        screenOptions={drawerNavigatorOptions}
       >
         <Drawer.Screen
-          name="Posts"
+          name="Posts list"
           component={TabsNavigator}
-        />
-        <Drawer.Screen
-          name="About"
-          component={AboutStackNavigator}
+          options={drawerPostScreenOptions}
         />
         <Drawer.Screen
           name="Create post"
           component={CreateStackNavigator}
+          options={drawerCreateScreenOptions}
+        />
+        <Drawer.Screen
+          name="About APP"
+          component={AboutStackNavigator}
+          options={drawerAboutScreenOptions}
         />
       </Drawer.Navigator>
     </NavigationContainer>

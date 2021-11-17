@@ -19,7 +19,10 @@ export const AboutScreen = ({navigation}) => {
   return (
     <View style={styles.center}>
       <Text>
-        AboutScreen
+        This is about page
+      </Text>
+      <Text>
+        Version <Text style={styles.version}>1.0.0</Text>
       </Text>
     </View>
   );
@@ -30,5 +33,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  version: {
+    fontFamily: 'open-bold'
   }
 })
