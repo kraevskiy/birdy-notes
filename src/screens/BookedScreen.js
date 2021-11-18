@@ -2,8 +2,8 @@ import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import {PostList} from '../components/PostList'
-import {HeaderLeftButtons} from '../components/HeaderLeftButton'
 import {loadBookedPosts} from '../store/actions'
+import {HeaderButton} from '../components/HeaderButton'
 
 export const BookedScreen = ({navigation}) => {
   const {bookedPosts} = useSelector(state=> state.posts)
@@ -24,7 +24,10 @@ export const BookedScreen = ({navigation}) => {
     dispatch(loadBookedPosts())
     navigation.setOptions({
       headerTitle: 'Favorite posts',
-      headerLeft: () => <HeaderLeftButtons openDrawer={toggleDrawerHandler}/>
+      headerLeft: () => <HeaderButton
+        title="Drawer"
+        iconName="ios-menu"
+        onPress={toggleDrawerHandler}/>
     })
   }, [dispatch, navigation])
 

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {StyleSheet, View, Text} from 'react-native'
-import {HeaderLeftButtons} from '../components/HeaderLeftButton'
+
+import {HeaderButton} from '../components/HeaderButton'
 
 export const CreateScreen = ({navigation}) => {
 
@@ -11,7 +12,10 @@ export const CreateScreen = ({navigation}) => {
   useEffect(() => {
     navigation.setOptions({
       headerTitle: 'Create post',
-      headerLeft: () => <HeaderLeftButtons openDrawer={toggleDrawerHandler}/>
+      headerLeft: () => <HeaderButton
+        title="Drawer"
+        iconName="ios-menu"
+        onPress={toggleDrawerHandler}/>
     })
   }, [])
 

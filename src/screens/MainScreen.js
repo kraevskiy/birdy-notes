@@ -2,9 +2,8 @@ import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import {PostList} from '../components/PostList'
-import {HeaderLeftButtons} from '../components/HeaderLeftButton'
-import {HeaderRightButtons} from '../components/HeaderRightButton'
 import {loadAllPosts} from '../store/actions'
+import {HeaderButton} from '../components/HeaderButton'
 
 export const MainScreen = ({navigation}) => {
   const {allPosts} = useSelector(state => state.posts)
@@ -25,8 +24,14 @@ export const MainScreen = ({navigation}) => {
     dispatch(loadAllPosts())
     navigation.setOptions({
       headerTitle: 'All posts',
-      headerRight: () => <HeaderRightButtons/>,
-      headerLeft: () => <HeaderLeftButtons openDrawer={toggleDrawerHandler}/>
+      headerRight: () => <HeaderButton
+        title="Take photo"
+        iconName="ios-camera"
+      />,
+      headerLeft: () => <HeaderButton
+        title="Drawer"
+        iconName="ios-menu"
+        onPress={toggleDrawerHandler}/>
     })
   }, [dispatch, navigation])
 

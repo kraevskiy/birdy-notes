@@ -1,21 +1,30 @@
 import React, {useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+
 import {StyleSheet, View, Text, Image, Button, ScrollView, Alert} from 'react-native'
-import {DATA} from '../data'
 import {THEME} from '../theme'
-import {HeaderButtons, Item} from 'react-navigation-header-buttons'
-import {AppHeaderIcon} from '../components/AppHeaderIcon'
+import {HeaderButton} from '../components/HeaderButton'
+import {toggleBooked} from '../store/posts/postsActions'
 
 export const PostScreen = ({navigation, route}) => {
+  const {allPosts} = useSelector(state => state.posts)
+  const dispatch = useDispatch()
   const params = route.params
-  const post = DATA.find(p => p.id === params.postId)
+  const post = allPosts.find(p => p.id === params.postId)
   const iconName = post.booked ? 'ios-star' : 'ios-star-outline'
+
+  const toggleHandler = () => {
+    dispatch(toggleBooked(params.postId))
+  }
 
   useEffect(() => {
     navigation.setOptions({
       title: `Post: ${params.postId} on ${new Date(params.date).toLocaleDateString()}`,
-      headerRight: () => <PostRightButtons iconName={iconName}/>
+      headerRight: () => <HeaderButton
+        iconName={iconName}
+        onPress={toggleHandler}/>
     })
-  }, [])
+  }, [toggleHandler, dispatch, navigation])
 
   const removeHandler = () => {
     Alert.alert(
@@ -28,7 +37,8 @@ export const PostScreen = ({navigation, route}) => {
         },
         {
           text: "Delete",
-          onPress: () => {},
+          onPress: () => {
+          },
           style: "destructive",
         },
       ],
@@ -54,16 +64,6 @@ export const PostScreen = ({navigation, route}) => {
     </ScrollView>
   );
 };
-
-const PostRightButtons = ({iconName}) => (
-  <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-    <Item
-      title="Take photo"
-      iconName={iconName}
-      onPress={() => console.log(111)}
-    />
-  </HeaderButtons>
-)
 
 const styles = StyleSheet.create({
   image: {
