@@ -7,5 +7,6 @@ export const TYPES = {
     LOAD_ALL_POSTS: 'LOAD_ALL_POSTS',
     TOGGLE_BOOKED: 'TOGGLE_BOOKED',
     REMOVE_POST: 'REMOVE_POST',
+    ADD_POST: 'ADD_POST',
   }
 }

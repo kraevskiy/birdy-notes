@@ -1,5 +1,5 @@
 import React from 'react'
-import {Platform} from 'react-native'
+import {Platform, Text} from 'react-native'
 import {THEME} from '../theme'
 import {Ionicons} from '@expo/vector-icons'
 
@@ -11,16 +11,27 @@ export const drawerNavigatorOptions = {
   }
 }
 
+const getStyleToLabelDrawer = (info) => {
+  return {
+    color: info.color,
+    fontSize: 15,
+    fontFamily: 'open-regular'
+  }
+}
+
 export const drawerPostScreenOptions = {
-  drawerIcon: (info) => <Ionicons name="ios-list" color={info.color} size={20}/>
+  drawerIcon: (info) => <Ionicons name="ios-list" color={info.color} size={20}/>,
+  drawerLabel: (info) => <Text style={getStyleToLabelDrawer(info)}>Posts</Text>
 }
 
 export const drawerCreateScreenOptions = {
-  drawerIcon: (info) => <Ionicons name="ios-add" color={info.color} size={20}/>
+  drawerIcon: (info) => <Ionicons name="ios-add" color={info.color} size={20}/>,
+  drawerLabel: (info) => <Text style={getStyleToLabelDrawer(info)}>Create post</Text>
 }
 
 export const drawerAboutScreenOptions = {
-  drawerIcon: (info) => <Ionicons name="ios-information" color={info.color} size={20}/>
+  drawerIcon: (info) => <Ionicons name="ios-information" color={info.color} size={20}/>,
+  drawerLabel: (info) => <Text style={getStyleToLabelDrawer(info)}>About App</Text>
 }
 
 export const tabNavigatorOptions = () => {
@@ -40,7 +51,6 @@ export const tabMainScreenOption = {
   tabBarLabel: 'All',
   headerShown: false,
   tabBarActiveTintColor: THEME.MAIN_COLOR
-
 }
 
 export const tabBookedScreenOption = {

@@ -18,3 +18,10 @@ export const removePost = (id) => {
     return dispatch({type: TYPES.POSTS.REMOVE_POST, payload: id})
   }
 }
+
+export const addPost = (post) => {
+  return (dispatch) => {
+    post.id = Date.now.toString()
+    return dispatch({type: TYPES.POSTS.ADD_POST, payload: post})
+  }
+}

@@ -26,7 +26,6 @@ export const PostScreen = ({navigation, route}) => {
   }, [toggleHandler, navigation, post])
 
   const removeHandler = () => {
-    console.log(navigation)
     Alert.alert(
       "Delete post",
       "Are you sure?",

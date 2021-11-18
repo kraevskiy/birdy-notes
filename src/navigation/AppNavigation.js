@@ -24,24 +24,6 @@ const Stack = createStackNavigator()
 const BottomTab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-function AboutStackNavigator() {
-  return (
-    <Stack.Navigator
-      screenOptions={stackNavigatorOptions}>
-      <Stack.Screen name="AboutStack" component={AboutScreen}/>
-    </Stack.Navigator>
-  )
-}
-
-function CreateStackNavigator() {
-  return (
-    <Stack.Navigator
-      screenOptions={stackNavigatorOptions}>
-      <Stack.Screen name="CreateStack" component={CreateScreen}/>
-    </Stack.Navigator>
-  )
-}
-
 function MainStackNavigator() {
   return (
     <Stack.Navigator
@@ -92,14 +74,14 @@ function AppDrawer() {
         options={drawerPostScreenOptions}
       />
       <Drawer.Screen
-        name="Create post"
-        component={CreateStackNavigator}
-        options={drawerCreateScreenOptions}
+        name="CreateStack"
+        component={CreateScreen}
+        options={{...stackNavigatorOptions, ...drawerCreateScreenOptions, headerShown: true}}
       />
       <Drawer.Screen
-        name="About APP"
-        component={AboutStackNavigator}
-        options={drawerAboutScreenOptions}
+        name="AboutStack"
+        component={AboutScreen}
+        options={{...stackNavigatorOptions, ...drawerAboutScreenOptions, headerShown: true}}
       />
     </Drawer.Navigator>
   )
