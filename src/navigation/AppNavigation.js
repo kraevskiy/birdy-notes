@@ -24,75 +24,102 @@ const Stack = createStackNavigator()
 const BottomTab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-const AboutStackNavigator = () => (
-  <Stack.Navigator
-    screenOptions={stackNavigatorOptions}>
-    <Stack.Screen name="AboutStack" component={AboutScreen}/>
-  </Stack.Navigator>
-)
+function AboutStackNavigator() {
+  return (
+    <Stack.Navigator
+      screenOptions={stackNavigatorOptions}>
+      <Stack.Screen name="AboutStack" component={AboutScreen}/>
+    </Stack.Navigator>
+  )
+}
 
-const CreateStackNavigator = () => (
-  <Stack.Navigator
-    screenOptions={stackNavigatorOptions}>
-    <Stack.Screen name="CreateStack" component={CreateScreen}/>
-  </Stack.Navigator>
-)
+function CreateStackNavigator() {
+  return (
+    <Stack.Navigator
+      screenOptions={stackNavigatorOptions}>
+      <Stack.Screen name="CreateStack" component={CreateScreen}/>
+    </Stack.Navigator>
+  )
+}
 
-const MainStackNavigator = () => (
-  <Stack.Navigator
-    screenOptions={stackNavigatorOptions}>
-    <Stack.Screen name="MainStack" component={MainScreen}/>
-    <Stack.Screen name="PostStack" component={PostScreen}/>
-  </Stack.Navigator>
-)
+function MainStackNavigator() {
+  return (
+    <Stack.Navigator
+      initialRouteName="MainStack"
+      screenOptions={stackNavigatorOptions}>
+      <Stack.Screen name="MainStack" component={MainScreen}/>
+    </Stack.Navigator>
+  )
+}
 
-const BookedStackNavigator = () => (
-  <Stack.Navigator
-    screenOptions={stackNavigatorOptions}>
-    <Stack.Screen name="BookedStack" component={BookedScreen}/>
-    <Stack.Screen name="PostStack" component={PostScreen}/>
-  </Stack.Navigator>
-)
+function BookedStackNavigator() {
+  return (
+    <Stack.Navigator
+      initialRouteName="BookedStack"
+      screenOptions={stackNavigatorOptions}>
+      <Stack.Screen name="BookedStack" component={BookedScreen}/>
+    </Stack.Navigator>
+  )
+}
 
-const TabsNavigator = () => (
-  <BottomTab.Navigator
-    {...tabNavigatorOptions()}
-  >
-    <BottomTab.Screen
-      name="All posts"
-      component={MainStackNavigator}
-      options={tabMainScreenOption}
-    />
-    <BottomTab.Screen
-      name="Favorite posts"
-      component={BookedStackNavigator}
-      options={tabBookedScreenOption}
-    />
-  </BottomTab.Navigator>
-)
+function Tabs() {
+  return (
+    <BottomTab.Navigator
+      {...tabNavigatorOptions()}
+    >
+      <BottomTab.Screen
+        name="All posts"
+        component={MainStackNavigator}
+        options={tabMainScreenOption}
+      />
+      <BottomTab.Screen
+        name="Favorite posts"
+        component={BookedStackNavigator}
+        options={tabBookedScreenOption}
+      />
+    </BottomTab.Navigator>
+  )
+}
+
+function AppDrawer() {
+  return (
+    <Drawer.Navigator
+      screenOptions={drawerNavigatorOptions}
+    >
+      <Drawer.Screen
+        name="Posts"
+        component={Tabs}
+        options={drawerPostScreenOptions}
+      />
+      <Drawer.Screen
+        name="Create post"
+        component={CreateStackNavigator}
+        options={drawerCreateScreenOptions}
+      />
+      <Drawer.Screen
+        name="About APP"
+        component={AboutStackNavigator}
+        options={drawerAboutScreenOptions}
+      />
+    </Drawer.Navigator>
+  )
+}
 
 export function AppNavigation() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator
-        screenOptions={drawerNavigatorOptions}
+      <Stack.Navigator
+        screenOptions={{...stackNavigatorOptions, headerShown: false}}
       >
-        <Drawer.Screen
-          name="Posts list"
-          component={TabsNavigator}
-          options={drawerPostScreenOptions}
+        <Stack.Screen
+          name="Root"
+          component={AppDrawer}
         />
-        <Drawer.Screen
-          name="Create post"
-          component={CreateStackNavigator}
-          options={drawerCreateScreenOptions}
-        />
-        <Drawer.Screen
-          name="About APP"
-          component={AboutStackNavigator}
-          options={drawerAboutScreenOptions}
-        />
-      </Drawer.Navigator>
+        <Stack.Screen
+          options={{headerShown: true}}
+          name="PostStack"
+          component={PostScreen}/>
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }

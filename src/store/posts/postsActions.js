@@ -7,15 +7,14 @@ export const loadAllPosts = () => {
   }
 }
 
-export const loadBookedPosts = () => {
-  return (dispatch) => {
-    const bookedPosts = DATA.filter(post => post.booked)
-    return dispatch({type: TYPES.POSTS.LOAD_BOOKED_POSTS, payload: bookedPosts})
-  }
-}
-
 export const toggleBooked = (id) => {
   return (dispatch) => {
     return dispatch({type: TYPES.POSTS.TOGGLE_BOOKED, payload: id})
+  }
+}
+
+export const removePost = (id) => {
+  return (dispatch) => {
+    return dispatch({type: TYPES.POSTS.REMOVE_POST, payload: id})
   }
 }

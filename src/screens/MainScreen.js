@@ -20,8 +20,11 @@ export const MainScreen = ({navigation}) => {
     navigation.toggleDrawer()
   }
 
-  useEffect(() => {
+  useEffect(()=>{
     dispatch(loadAllPosts())
+  }, [])
+
+  useEffect(() => {
     navigation.setOptions({
       headerTitle: 'All posts',
       headerRight: () => <HeaderButton
@@ -33,7 +36,7 @@ export const MainScreen = ({navigation}) => {
         iconName="ios-menu"
         onPress={toggleDrawerHandler}/>
     })
-  }, [dispatch, navigation])
+  }, [navigation])
 
   return (
     <PostList data={allPosts} onOpen={openPostHandler}/>
