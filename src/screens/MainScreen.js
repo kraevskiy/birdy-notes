@@ -1,11 +1,15 @@
 import React, {useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 
-import {DATA} from '../data'
 import {PostList} from '../components/PostList'
 import {HeaderLeftButtons} from '../components/HeaderLeftButton'
 import {HeaderRightButtons} from '../components/HeaderRightButton'
+import {loadAllPosts} from '../store/actions'
 
 export const MainScreen = ({navigation}) => {
+  const {allPosts} = useSelector(state => state.posts)
+  const dispatch = useDispatch()
+
   const openPostHandler = (post) => {
     navigation.navigate('PostStack', {
       postId: post.id,
@@ -13,19 +17,20 @@ export const MainScreen = ({navigation}) => {
     })
   }
 
-  const toggleDrawerHandler = () =>{
+  const toggleDrawerHandler = () => {
     navigation.toggleDrawer()
   }
 
   useEffect(() => {
+    dispatch(loadAllPosts())
     navigation.setOptions({
       headerTitle: 'All posts',
       headerRight: () => <HeaderRightButtons/>,
       headerLeft: () => <HeaderLeftButtons openDrawer={toggleDrawerHandler}/>
     })
-  }, [])
+  }, [dispatch, navigation])
 
   return (
-    <PostList data={DATA} onOpen={openPostHandler}/>
+    <PostList data={allPosts} onOpen={openPostHandler}/>
   )
 };
