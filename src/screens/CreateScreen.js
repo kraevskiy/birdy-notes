@@ -19,8 +19,8 @@ import {PhotoPicker} from '../components/PhotoPicker'
 
 export const CreateScreen = ({navigation}) => {
   const [text, setText] = useState('');
+  const [image, setImage] = useState(null)
   const dispatch = useDispatch()
-  const imgRef = useRef()
 
   const toggleDrawerHandler = () => {
     navigation.toggleDrawer()
@@ -37,18 +37,24 @@ export const CreateScreen = ({navigation}) => {
   }, [])
 
   const photoPickHandler = (uri) => {
-    imgRef.current = uri
+    setImage(uri)
   }
 
-  const saveHandler = () => {
+  const saveHandler = async () => {
     const post = {
       date: new Date().toJSON(),
       text,
-      img: imgRef.current,
+      img: image,
       booked: false
     }
-    dispatch(addPost(post))
-    navigation.navigate('MainStack')
+    try {
+      await dispatch(addPost(post))
+      setText('')
+      setImage(null)
+      navigation.navigate('MainStack')
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -67,12 +73,12 @@ export const CreateScreen = ({navigation}) => {
             onChangeText={setText}
             styles={styles.textarea}
           />
-          <PhotoPicker onPick={photoPickHandler}/>
+          <PhotoPicker onPick={photoPickHandler} img={image}/>
           <Button
             title="Create post"
             color={THEME.MAIN_COLOR}
             onPress={saveHandler}
-            disabled={!text || !imgRef.current}
+            disabled={!!!text || !!!image}
           />
         </View>
       </TouchableWithoutFeedback>

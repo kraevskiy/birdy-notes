@@ -13,7 +13,7 @@ export const PostScreen = ({navigation, route}) => {
   const post = allPosts.find(p => p.id === postId)
 
   const toggleHandler = () => {
-    dispatch(toggleBooked(postId))
+    dispatch(toggleBooked(post))
   }
 
   useEffect(() => {

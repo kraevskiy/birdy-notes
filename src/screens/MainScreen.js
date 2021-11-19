@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import { DrawerActions } from '@react-navigation/native';
 
 import {PostList} from '../components/PostList'
 import {loadAllPosts} from '../store/actions'
 import {HeaderButton} from '../components/HeaderButton'
+import {Loader} from '../components/Loader'
 
 export const MainScreen = ({navigation, route}) => {
-  const {allPosts} = useSelector(state => state.posts)
+  const {allPosts, loading} = useSelector(state => state.posts)
   const dispatch = useDispatch()
 
   const openPostHandler = (post) => {
@@ -44,7 +44,13 @@ export const MainScreen = ({navigation, route}) => {
     })
   }, [navigation])
 
+  if(loading) {
+    return <Loader />
+  }
+
   return (
     <PostList data={allPosts} onOpen={openPostHandler}/>
   )
 };
+
+

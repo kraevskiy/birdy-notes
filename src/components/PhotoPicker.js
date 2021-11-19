@@ -11,12 +11,18 @@ async function askForPermission() {
   }
 }
 
-export const PhotoPicker = ({onPick}) => {
+export const PhotoPicker = ({onPick, img}) => {
   const [image, setImage] = useState(null)
 
   useEffect(() => {
     askForPermission()
   }, [])
+
+  useEffect(()=>{
+    if(img === null) {
+      setImage(null)
+    }
+  }, [img])
 
   const takePhoto = async () => {
     let img = await ImagePicker.launchCameraAsync({
