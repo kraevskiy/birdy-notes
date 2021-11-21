@@ -8,7 +8,7 @@ import {Platform} from 'react-native'
 
 import {
   drawerAboutScreenOptions, drawerCreateScreenOptions,
-  drawerNavigatorOptions, drawerPostScreenOptions,
+  drawerNavigatorOptions, drawerPostScreenOptions, drawerWeatherScreenOptions,
   stackNavigatorOptions,
   tabBookedScreenOption,
   tabMainScreenOption,
@@ -19,6 +19,7 @@ import {PostScreen} from '../screens/PostScreen'
 import {BookedScreen} from '../screens/BookedScreen'
 import {AboutScreen} from '../screens/AboutScreen'
 import {CreateScreen} from '../screens/CreateScreen'
+import {WeatherScreen} from '../screens/WeatherScreen'
 
 const Stack = createStackNavigator()
 const BottomTab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
@@ -76,12 +77,17 @@ function AppDrawer() {
       <Drawer.Screen
         name="CreateStack"
         component={CreateScreen}
-        options={{...stackNavigatorOptions, ...drawerCreateScreenOptions, headerShown: true}}
+        options={{...stackNavigatorOptions, ...drawerCreateScreenOptions}}
       />
       <Drawer.Screen
         name="AboutStack"
         component={AboutScreen}
-        options={{...stackNavigatorOptions, ...drawerAboutScreenOptions, headerShown: true}}
+        options={{...stackNavigatorOptions, ...drawerAboutScreenOptions}}
+      />
+      <Drawer.Screen
+        name="WeatherStack"
+        component={WeatherScreen}
+        options={{...stackNavigatorOptions, ...drawerWeatherScreenOptions}}
       />
     </Drawer.Navigator>
   )

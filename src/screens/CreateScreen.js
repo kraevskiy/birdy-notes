@@ -12,27 +12,20 @@ import {
   Keyboard
 } from 'react-native'
 
-import {HeaderButton} from '../components/HeaderButton'
 import {THEME} from '../theme'
 import {addPost} from '../store/posts/postsActions'
 import {PhotoPicker} from '../components/PhotoPicker'
+import {DrawerAppButton} from '../components/DrawerAppButton'
 
 export const CreateScreen = ({navigation}) => {
   const [text, setText] = useState('');
   const [image, setImage] = useState(null)
   const dispatch = useDispatch()
 
-  const toggleDrawerHandler = () => {
-    navigation.toggleDrawer()
-  }
-
   useEffect(() => {
     navigation.setOptions({
       headerTitle: 'New post',
-      headerLeft: () => <HeaderButton
-        title="Drawer"
-        iconName="ios-menu"
-        onPress={toggleDrawerHandler}/>
+      headerLeft: () => <DrawerAppButton navigation={navigation}/>
     })
   }, [])
 

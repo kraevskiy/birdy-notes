@@ -2,20 +2,14 @@ import React, {useEffect} from 'react'
 import {StyleSheet, View, Text} from 'react-native'
 
 import {HeaderButton} from '../components/HeaderButton'
+import {DrawerAppButton} from '../components/DrawerAppButton'
 
 export const AboutScreen = ({navigation}) => {
-
-  const toggleDrawerHandler = () =>{
-    navigation.toggleDrawer()
-  }
 
   useEffect(() => {
     navigation.setOptions({
       headerTitle: 'About',
-      headerLeft: () => <HeaderButton
-        title="Drawer"
-        iconName="ios-menu"
-        onPress={toggleDrawerHandler}/>
+      headerLeft: () => <DrawerAppButton navigation={navigation}/>
     })
   }, [])
 

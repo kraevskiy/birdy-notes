@@ -5,6 +5,7 @@ import {PostList} from '../components/PostList'
 import {loadAllPosts} from '../store/actions'
 import {HeaderButton} from '../components/HeaderButton'
 import {Loader} from '../components/Loader'
+import {DrawerAppButton} from '../components/DrawerAppButton'
 
 export const MainScreen = ({navigation, route}) => {
   const {allPosts, loading} = useSelector(state => state.posts)
@@ -15,10 +16,6 @@ export const MainScreen = ({navigation, route}) => {
       postId: post.id,
       date: post.date,
     })
-  }
-
-  const toggleDrawerHandler = () => {
-    navigation.toggleDrawer()
   }
 
   const createPostHandler = () => {
@@ -37,10 +34,7 @@ export const MainScreen = ({navigation, route}) => {
         iconName="ios-camera"
         onPress={createPostHandler}
       />,
-      headerLeft: () => <HeaderButton
-        title="Drawer"
-        iconName="ios-menu"
-        onPress={toggleDrawerHandler}/>
+      headerLeft: () => <DrawerAppButton navigation={navigation}/>
     })
   }, [navigation])
 

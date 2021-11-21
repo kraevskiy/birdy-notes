@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {useSelector} from 'react-redux'
 
 import {PostList} from '../components/PostList'
-import {HeaderButton} from '../components/HeaderButton'
+import {DrawerAppButton} from '../components/DrawerAppButton'
 
 export const BookedScreen = ({navigation}) => {
   const {bookedPosts} = useSelector(state=> state.posts)
@@ -14,17 +14,10 @@ export const BookedScreen = ({navigation}) => {
     })
   }
 
-  const toggleDrawerHandler = () =>{
-    navigation.toggleDrawer()
-  }
-
   useEffect(() => {
     navigation.setOptions({
       headerTitle: 'Favorite posts',
-      headerLeft: () => <HeaderButton
-        title="Drawer"
-        iconName="ios-menu"
-        onPress={toggleDrawerHandler}/>
+      headerLeft: () => <DrawerAppButton navigation={navigation}/>
     })
   }, [navigation, bookedPosts])
 

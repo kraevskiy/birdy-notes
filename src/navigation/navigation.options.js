@@ -26,12 +26,20 @@ export const drawerPostScreenOptions = {
 
 export const drawerCreateScreenOptions = {
   drawerIcon: (info) => <Ionicons name="ios-add" color={info.color} size={20}/>,
-  drawerLabel: (info) => <Text style={getStyleToLabelDrawer(info)}>Create post</Text>
+  drawerLabel: (info) => <Text style={getStyleToLabelDrawer(info)}>Create post</Text>,
+  headerShown: true
+}
+
+export const drawerWeatherScreenOptions = {
+  drawerIcon: (info) => <Ionicons name="ios-partly-sunny-outline" color={info.color} size={20}/>,
+  drawerLabel: (info) => <Text style={getStyleToLabelDrawer(info)}>Show weather</Text>,
+  headerShown: true
 }
 
 export const drawerAboutScreenOptions = {
   drawerIcon: (info) => <Ionicons name="ios-information" color={info.color} size={20}/>,
-  drawerLabel: (info) => <Text style={getStyleToLabelDrawer(info)}>About App</Text>
+  drawerLabel: (info) => <Text style={getStyleToLabelDrawer(info)}>About App</Text>,
+  headerShown: true
 }
 
 export const tabNavigatorOptions = () => {
