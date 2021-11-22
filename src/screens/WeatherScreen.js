@@ -4,52 +4,7 @@ import * as Location from 'expo-location'
 import {DrawerAppButton} from '../components/DrawerAppButton'
 import {Loader} from '../components/Loader'
 import axios from 'axios'
-import {Weather} from '../components/Weather'
-
-const DATA = {
-  "base": "stations",
-  "clouds": {
-    "all": 90,
-  },
-  "cod": 200,
-  "coord": {
-    "lat": 50.4962,
-    "lon": 30.246,
-  },
-  "dt": 1637498479,
-  "id": 707565,
-  "main": {
-    "feels_like": 8.85,
-    "humidity": 59,
-    "pressure": 1005,
-    "temp": 10.23,
-    "temp_max": 11.03,
-    "temp_min": 9.85,
-  },
-  "name": "Irpin",
-  "sys": {
-    "country": "UA",
-    "id": 2034978,
-    "sunrise": 1637472199,
-    "sunset": 1637503608,
-    "type": 2,
-  },
-  "timezone": 7200,
-  "visibility": 10000,
-  "weather": [
-    {
-      "description": "overcast clouds",
-      "icon": "04d",
-      "id": 804,
-      "main": "Clouds",
-    },
-  ],
-  "wind": {
-    "deg": 250,
-    "gust": 11,
-    "speed": 6,
-  },
-};
+import Weather from '../components/Weather'
 
 export const WeatherScreen = ({navigation}) => {
   const [weather, setWeather] = useState(null);
@@ -77,9 +32,9 @@ export const WeatherScreen = ({navigation}) => {
         return;
       }
       try {
-        // const {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
-        // const weather = await getApiWeatherUrl({latitude, longitude})
-        setWeather(DATA);
+        const {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
+        const weather = await getApiWeatherUrl({latitude, longitude})
+        setWeather(weather);
         setLoading(false);
       } catch (e) {
         console.log(e)
@@ -89,10 +44,7 @@ export const WeatherScreen = ({navigation}) => {
     })();
   }, []);
 
-  if (loading) {
-    return <Loader/>
-  }
   return (
-    loading ? <Loader/> : <Weather temp={Math.round(weather.main.temp)}/>
+    loading ? <Loader/> : <Weather weather={weather}/>
   )
 }

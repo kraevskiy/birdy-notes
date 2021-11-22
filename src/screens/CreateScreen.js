@@ -91,6 +91,8 @@ const styles = StyleSheet.create({
   },
   textarea: {
     padding: 10,
-    marginBottom: 10
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: THEME.MAIN_COLOR
   }
 })

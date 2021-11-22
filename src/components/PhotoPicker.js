@@ -63,6 +63,9 @@ export const PhotoPicker = ({onPick, img}) => {
   return (
     <View style={styles.wrapper}>
       <Button
+        style={{
+          marginBottom: 10
+        }}
         title="Take photo"
         onPress={takePhoto}
       />
