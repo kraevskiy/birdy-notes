@@ -1,20 +1,19 @@
 {
   "expo": {
-    "name": "Kraievskyi First APP",
-    "slug": "kraievskyi-first-app",
+    "name": "Birdy Notes",
+    "slug": "birdy-notes",
     "privacy": "public",
     "version": "1.0.0",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "orientation": "portrait",
-    "icon": "./assets/rn-icon.png",
+    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/rn-splash.png",
+      "image": "./assets/splash.png",
       "resizeMode": "cover",
-      "backgroundColor": "#242832"
+      "backgroundColor": "#FFFFFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,11 +23,11 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.kraevskiyfreelanc.rn-blog-app",
+      "bundleIdentifier": "com.kraevskiyfreelanc.birdy-notes",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "com.kraevskiyfreelanc.rn_blog_app",
+      "package": "com.kraevskiyfreelanc.birdy_notes",
       "versionCode": 1,
       "permissions": [
         "CAMERA",
@@ -37,7 +36,7 @@
         "INTERNET"
       ],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/rn-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#242832"
       }
     },

@@ -1,30 +1,32 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {
   StyleSheet,
   View,
   Text,
   TextInput,
-  Image,
   Button,
   ScrollView,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Alert
 } from 'react-native'
 
 import {THEME} from '../theme'
 import {addPost} from '../store/posts/postsActions'
 import {PhotoPicker} from '../components/PhotoPicker'
-import {DrawerAppButton} from '../components/DrawerAppButton'
+import {DrawerAppButton} from '../components/ui/DrawerAppButton'
+import {AppButton} from '../components/ui/AppButton'
 
 export const CreateScreen = ({navigation}) => {
   const [text, setText] = useState('');
+  const [title, setTitle] = useState('');
   const [image, setImage] = useState(null)
   const dispatch = useDispatch()
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: 'New post',
+      headerTitle: 'Create a new Birdy Notes',
       headerLeft: () => <DrawerAppButton navigation={navigation}/>
     })
   }, [])
@@ -34,19 +36,25 @@ export const CreateScreen = ({navigation}) => {
   }
 
   const saveHandler = async () => {
-    const post = {
-      date: new Date().toJSON(),
-      text,
-      img: image,
-      booked: false
-    }
-    try {
-      await dispatch(addPost(post))
-      setText('')
-      setImage(null)
-      navigation.navigate('MainStack')
-    } catch (e) {
-      console.log(e)
+    if (!!!title || !!!image) {
+      Alert.alert('Check all fields')
+    } else {
+      const post = {
+        date: new Date().toJSON(),
+        text,
+        title,
+        img: image,
+        booked: false
+      }
+      try {
+        await dispatch(addPost(post))
+        setText('')
+        setTitle('')
+        setImage(null)
+        navigation.navigate('MainStack')
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 
@@ -57,22 +65,30 @@ export const CreateScreen = ({navigation}) => {
       >
         <View style={styles.wrapper}>
           <Text style={styles.title}>
-            Added new post
+            What’s on your mind
           </Text>
           <TextInput
             multiline
+            value={title}
+            placeholder="Enter whatever you want"
+            onChangeText={setTitle}
+            style={styles.input}
+          />
+          <TextInput
+            multiline
             value={text}
-            placeholder="Enter text"
+            placeholder="Enter whatever you want"
             onChangeText={setText}
-            styles={styles.textarea}
+            style={styles.textarea}
           />
           <PhotoPicker onPick={photoPickHandler} img={image}/>
-          <Button
-            title="Create post"
-            color={THEME.MAIN_COLOR}
+          <AppButton
             onPress={saveHandler}
-            disabled={!!!text || !!!image}
-          />
+            color={(!!!title || !!!image) ? THEME.MAIN_COLOR_OPACITY : THEME.MAIN_COLOR}
+            disabled={!!!title || !!!image}
+          >
+            Save a Birdy Note
+          </AppButton>
         </View>
       </TouchableWithoutFeedback>
     </ScrollView>
@@ -86,13 +102,23 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     textAlign: 'center',
-    fontFamily: 'open-regular',
+    fontFamily: 'poppins-regular',
     marginVertical: 10
   },
-  textarea: {
+  input: {
     padding: 10,
-    marginBottom: 20,
+    borderStyle: 'solid',
     borderBottomWidth: 1,
-    borderBottomColor: THEME.MAIN_COLOR
+    borderBottomColor: THEME.MAIN_COLOR_OPACITY,
+    marginBottom: 15
+  },
+  textarea: {
+    marginBottom: 15,
+    padding: 10,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: THEME.MAIN_COLOR_OPACITY,
+    borderRadius: 10,
+    height: 90
   }
 })

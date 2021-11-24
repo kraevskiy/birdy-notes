@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react'
 import {StyleSheet, View, Text} from 'react-native'
 
-import {HeaderButton} from '../components/HeaderButton'
-import {DrawerAppButton} from '../components/DrawerAppButton'
+import {HeaderButton} from '../components/ui/HeaderButton'
+import {DrawerAppButton} from '../components/ui/DrawerAppButton'
 
 export const AboutScreen = ({navigation}) => {
 
@@ -32,6 +32,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   version: {
-    fontFamily: 'open-bold'
+    fontFamily: 'poppins-bold'
   }
 })

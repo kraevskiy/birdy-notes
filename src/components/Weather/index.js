@@ -1,16 +1,16 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
-import {LinearGradient} from 'expo-linear-gradient'
 import {weatherOptions} from './weatherOptions'
+import AnimatedLinearGradient from "./../AnimatedLinearGradient";
 
 export default function ({weather}) {
   const weatherTemp = Math.floor(weather.main.temp)
   const weatherCondition = weather.weather[0].main
   return (
-    <LinearGradient
-      colors={weatherOptions[weatherCondition].gradient}
+    <View
       style={styles.container}>
+      <AnimatedLinearGradient customColors={weatherOptions[weatherCondition].gradient} speed={3000}/>
       <View style={styles.halfContainer}>
         <MaterialCommunityIcons name={weatherOptions[weatherCondition].iconName} size={96} color="white"/>
         <Text style={styles.temp}>
@@ -21,7 +21,7 @@ export default function ({weather}) {
         <Text style={styles.title}>{weatherOptions[weatherCondition].title}</Text>
         <Text style={styles.subtitle}>{weatherOptions[weatherCondition].subtitle}</Text>
       </View>
-    </LinearGradient>
+    </View>
   )
 }
 
@@ -40,17 +40,17 @@ const styles = StyleSheet.create({
   },
   temp: {
     fontSize: 42,
-    fontFamily: 'open-regular',
+    fontFamily: 'poppins-regular',
     color: 'white'
   },
   title: {
-    fontFamily: 'open-regular',
+    fontFamily: 'poppins-regular',
     color: 'white',
     fontSize: 44,
     marginBottom: 10
   },
   subtitle: {
-    fontFamily: 'open-bold',
+    fontFamily: 'poppins-bold',
     color: 'white',
     fontSize: 20
   }

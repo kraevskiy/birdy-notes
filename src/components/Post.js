@@ -1,5 +1,6 @@
 import React from 'react'
 import {StyleSheet, View, ImageBackground, Text, TouchableOpacity} from 'react-native'
+import {AppCard} from './ui/AppCard'
 
 export const Post = ({post, onOpen}) => {
   return (
@@ -7,7 +8,7 @@ export const Post = ({post, onOpen}) => {
       activeOpacity={0.7}
       onPress={() => onOpen(post)}
     >
-      <View style={styles.post}>
+      <AppCard style={styles.post}>
         <ImageBackground
           style={styles.image}
           source={{uri: post.img}}
@@ -18,7 +19,7 @@ export const Post = ({post, onOpen}) => {
             </Text>
           </View>
         </ImageBackground>
-      </View>
+      </AppCard>
     </TouchableOpacity>
   );
 };
@@ -40,6 +41,6 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    fontFamily: 'open-regular'
+    fontFamily: 'poppins-regular'
   }
 })

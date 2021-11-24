@@ -8,6 +8,6 @@ export const DrawerAppButton = ({navigation}) => {
 
   return <HeaderButton
     title="Drawer"
-    iconName="ios-menu"
+    iconName="menu"
     onPress={toggleDrawerHandler}/>
 }

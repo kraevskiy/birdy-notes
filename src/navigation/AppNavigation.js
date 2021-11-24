@@ -15,7 +15,7 @@ import {
   tabNavigatorOptions
 } from './navigation.options'
 import {MainScreen} from '../screens/MainScreen'
-import {PostScreen} from '../screens/PostScreen'
+import {NoteScreen} from '../screens/NoteScreen'
 import {BookedScreen} from '../screens/BookedScreen'
 import {AboutScreen} from '../screens/AboutScreen'
 import {CreateScreen} from '../screens/CreateScreen'
@@ -51,12 +51,12 @@ function Tabs() {
       {...tabNavigatorOptions()}
     >
       <BottomTab.Screen
-        name="All posts"
+        name="All notes"
         component={MainStackNavigator}
         options={tabMainScreenOption}
       />
       <BottomTab.Screen
-        name="Favorite posts"
+        name="Favorite notes"
         component={BookedStackNavigator}
         options={tabBookedScreenOption}
       />
@@ -70,7 +70,7 @@ function AppDrawer() {
       screenOptions={drawerNavigatorOptions}
     >
       <Drawer.Screen
-        name="Posts"
+        name="Notes"
         component={Tabs}
         options={drawerPostScreenOptions}
       />
@@ -105,8 +105,8 @@ export function AppNavigation() {
         />
         <Stack.Screen
           options={{headerShown: true}}
-          name="PostStack"
-          component={PostScreen}/>
+          name="NoteStack"
+          component={NoteScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

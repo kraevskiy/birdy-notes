@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {StyleSheet, View, Image, Button, Platform, Alert} from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
+import {AppButton} from './ui/AppButton'
+import {THEME} from '../theme'
 
 export const PhotoPicker = ({onPick, img}) => {
   const [image, setImage] = useState(null)
@@ -8,7 +10,7 @@ export const PhotoPicker = ({onPick, img}) => {
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync().then(res => {
+        const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync().then(res => {
           if (res.status !== 'granted') {
             return {
               ...res,
@@ -62,17 +64,22 @@ export const PhotoPicker = ({onPick, img}) => {
 
   return (
     <View style={styles.wrapper}>
-      <Button
+      <AppButton
         style={{
-          marginBottom: 10
+          marginBottom: 15
         }}
-        title="Take photo"
-        onPress={takePhoto}
-      />
-      <Button
-        title="Chose a library"
+        color={THEME.SECOND_COLOR}
         onPress={chosePhoto}
-      />
+      >
+        Attach Photo Related to the Note
+      </AppButton>
+
+      <AppButton
+        color={THEME.SECOND_COLOR}
+        onPress={takePhoto}
+      >
+        Or take a photo
+      </AppButton>
       {image && <Image style={styles.image} source={{uri: image}}/>}
     </View>
   );
@@ -80,7 +87,8 @@ export const PhotoPicker = ({onPick, img}) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginBottom: 10
+    marginBottom: 15,
+    flexDirection: 'column'
   },
   image: {
     width: '100%',

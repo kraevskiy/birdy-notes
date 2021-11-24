@@ -4,8 +4,9 @@ import {DB} from './db'
 export async function bootstrap() {
   try{
     await Font.loadAsync({
-      'open-bold': require('./../assets/fonts/OpenSans-Bold.ttf'),
-      'open-regular': require('./../assets/fonts/OpenSans-Regular.ttf')
+      'poppins-regular': require('./../assets/fonts/Poppins-Regular.ttf'),
+      'poppins-medium': require('./../assets/fonts/Poppins-Medium.ttf'),
+      'poppins-bold': require('./../assets/fonts/Poppins-SemiBold.ttf'),
     })
     await DB.init()
     console.log('database started...')
