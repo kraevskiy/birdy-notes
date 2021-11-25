@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Birdy Notes",
+    "description": "Birdy Notes is the simplest way to keep your daily tasks",
     "slug": "birdy-notes",
     "privacy": "public",
     "version": "1.0.0",
@@ -47,7 +48,6 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
-    ],
-    "description": ""
+    ]
   }
 }

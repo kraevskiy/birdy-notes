@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {
   StyleSheet,
   View,
-  Text,
   TextInput,
-  Button,
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
@@ -17,16 +15,20 @@ import {addPost} from '../store/posts/postsActions'
 import {PhotoPicker} from '../components/PhotoPicker'
 import {DrawerAppButton} from '../components/ui/DrawerAppButton'
 import {AppButton} from '../components/ui/AppButton'
+import {namesNavigationConstant} from '../navigation/names-navigation.constans'
+import {createScreenText} from '../texts/create-screen.text'
+import {AppTextMedium} from '../components/ui/AppTextMedium'
 
 export const CreateScreen = ({navigation}) => {
   const [text, setText] = useState('');
   const [title, setTitle] = useState('');
   const [image, setImage] = useState(null)
+  const inputTitleRef = useRef(null)
   const dispatch = useDispatch()
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: 'Create a new Birdy Notes',
+      headerTitle: createScreenText.screenTitle,
       headerLeft: () => <DrawerAppButton navigation={navigation}/>
     })
   }, [])
@@ -37,7 +39,8 @@ export const CreateScreen = ({navigation}) => {
 
   const saveHandler = async () => {
     if (!!!title || !!!image) {
-      Alert.alert('Check all fields')
+      Alert.alert(createScreenText.error)
+      inputTitleRef.current.focus()
     } else {
       const post = {
         date: new Date().toJSON(),
@@ -51,7 +54,7 @@ export const CreateScreen = ({navigation}) => {
         setText('')
         setTitle('')
         setImage(null)
-        navigation.navigate('MainStack')
+        navigation.navigate(namesNavigationConstant.stack.main)
       } catch (e) {
         console.log(e)
       }
@@ -64,20 +67,21 @@ export const CreateScreen = ({navigation}) => {
         onPress={() => Keyboard.dismiss()}
       >
         <View style={styles.wrapper}>
-          <Text style={styles.title}>
-            What’s on your mind
-          </Text>
+          <AppTextMedium style={styles.title}>
+            {createScreenText.title}
+          </AppTextMedium>
           <TextInput
+            ref={inputTitleRef}
             multiline
             value={title}
-            placeholder="Enter whatever you want"
+            placeholder={createScreenText.inputTitle}
             onChangeText={setTitle}
             style={styles.input}
           />
           <TextInput
             multiline
             value={text}
-            placeholder="Enter whatever you want"
+            placeholder={createScreenText.inputText}
             onChangeText={setText}
             style={styles.textarea}
           />
@@ -87,7 +91,7 @@ export const CreateScreen = ({navigation}) => {
             color={(!!!title || !!!image) ? THEME.MAIN_COLOR_OPACITY : THEME.MAIN_COLOR}
             disabled={!!!title || !!!image}
           >
-            Save a Birdy Note
+            {createScreenText.saveBtn}
           </AppButton>
         </View>
       </TouchableWithoutFeedback>
@@ -102,7 +106,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     textAlign: 'center',
-    fontFamily: 'poppins-regular',
     marginVertical: 10
   },
   input: {

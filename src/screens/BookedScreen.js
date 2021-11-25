@@ -1,15 +1,18 @@
 import React, {useEffect} from 'react'
 import {useSelector} from 'react-redux'
+import {StyleSheet} from 'react-native'
 
-import {PostList} from '../components/PostList'
+import {NotesList} from '../components/NotesList'
 import {DrawerAppButton} from '../components/ui/DrawerAppButton'
-import {StyleSheet, Text} from 'react-native'
+import {namesNavigationConstant} from '../navigation/names-navigation.constans'
+import {bookedScreenText} from '../texts/booked-screen.text'
+import {AppTextMedium} from '../components/ui/AppTextMedium'
 
 export const BookedScreen = ({navigation}) => {
   const {bookedPosts} = useSelector(state => state.posts)
 
   const openPostHandler = (post) => {
-    navigation.navigate('NoteStack', {
+    navigation.navigate(namesNavigationConstant.stack.note, {
       postId: post.id,
       date: post.date,
     })
@@ -17,15 +20,15 @@ export const BookedScreen = ({navigation}) => {
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: 'Favorite Birdy Notes',
+      headerTitle: bookedScreenText.screenTitle,
       headerLeft: () => <DrawerAppButton navigation={navigation}/>
     })
   }, [navigation, bookedPosts])
 
   return (
     bookedPosts.length
-      ? <PostList data={bookedPosts} onOpen={openPostHandler}/>
-      : <Text style={styles.text}>Don’t have favorite notes 😩</Text>
+      ? <NotesList data={bookedPosts} onOpen={openPostHandler}/>
+      : <AppTextMedium style={styles.text}>{bookedScreenText.notNotes}</AppTextMedium>
   )
 };
 

@@ -5,6 +5,7 @@ import {DrawerAppButton} from '../components/ui/DrawerAppButton'
 import {Loader} from '../components/ui/Loader'
 import axios from 'axios'
 import Weather from '../components/Weather'
+import {weatherScreenText} from '../texts/weather-screen.text'
 
 const weatherData = {
   "base": "stations",
@@ -64,7 +65,7 @@ export const WeatherScreen = ({navigation}) => {
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: 'Weather',
+      headerTitle: weatherScreenText.screenTitle,
       headerLeft: () => <DrawerAppButton navigation={navigation}/>
     })
   }, [])
@@ -73,7 +74,7 @@ export const WeatherScreen = ({navigation}) => {
     (async () => {
       let {status} = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
-        Alert.alert('Permission to access location was denied');
+        Alert.alert(weatherScreenText.errorLocation);
         return;
       }
       try {

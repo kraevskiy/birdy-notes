@@ -1,10 +1,9 @@
 import React from 'react'
 import {FlatList, StyleSheet, View} from 'react-native'
-import {Text} from 'react-native'
 
 import {AppCard} from './ui/AppCard'
 
-export const PostList = ({data, onOpen}) => {
+export const NotesList = ({data, onOpen}) => {
   return (
     <View style={styles.wrapper}>
       <FlatList

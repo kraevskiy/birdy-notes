@@ -3,6 +3,7 @@ import {StyleSheet, View, Image, Button, Platform, Alert} from 'react-native'
 import * as ImagePicker from 'expo-image-picker'
 import {AppButton} from './ui/AppButton'
 import {THEME} from '../theme'
+import {createScreenText} from '../texts/create-screen.text'
 
 export const PhotoPicker = ({onPick, img}) => {
   const [image, setImage] = useState(null)
@@ -16,13 +17,13 @@ export const PhotoPicker = ({onPick, img}) => {
               ...res,
               status: 'error'
             }
-            Alert.alert('Sorry, we need camera roll permissions to make this work!');
+            Alert.alert(createScreenText.errorCamera);
           } else {
             return ImagePicker.requestCameraPermissionsAsync()
           }
         });
         if (status !== 'granted') {
-          Alert.alert('Sorry, we need camera roll permissions to make this work!');
+          Alert.alert(createScreenText.errorMedia);
         }
       }
     })();
@@ -71,14 +72,14 @@ export const PhotoPicker = ({onPick, img}) => {
         color={THEME.SECOND_COLOR}
         onPress={chosePhoto}
       >
-        Attach Photo Related to the Note
+        {createScreenText.attachBtn}
       </AppButton>
 
       <AppButton
         color={THEME.SECOND_COLOR}
         onPress={takePhoto}
       >
-        Or take a photo
+        {createScreenText.cameraBtn}
       </AppButton>
       {image && <Image style={styles.image} source={{uri: image}}/>}
     </View>

@@ -20,6 +20,8 @@ import {BookedScreen} from '../screens/BookedScreen'
 import {AboutScreen} from '../screens/AboutScreen'
 import {CreateScreen} from '../screens/CreateScreen'
 import {WeatherScreen} from '../screens/WeatherScreen'
+import {PrivacyScreen} from '../screens/PrivacyScreen'
+import {namesNavigationConstant} from './names-navigation.constans'
 
 const Stack = createStackNavigator()
 const BottomTab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
@@ -28,9 +30,9 @@ const Drawer = createDrawerNavigator();
 function MainStackNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="MainStack"
+      initialRouteName={namesNavigationConstant.stack.main}
       screenOptions={stackNavigatorOptions}>
-      <Stack.Screen name="MainStack" component={MainScreen}/>
+      <Stack.Screen name={namesNavigationConstant.stack.main} component={MainScreen}/>
     </Stack.Navigator>
   )
 }
@@ -38,9 +40,9 @@ function MainStackNavigator() {
 function BookedStackNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="BookedStack"
+      initialRouteName={namesNavigationConstant.stack.booked}
       screenOptions={stackNavigatorOptions}>
-      <Stack.Screen name="BookedStack" component={BookedScreen}/>
+      <Stack.Screen name={namesNavigationConstant.stack.booked} component={BookedScreen}/>
     </Stack.Navigator>
   )
 }
@@ -51,12 +53,12 @@ function Tabs() {
       {...tabNavigatorOptions()}
     >
       <BottomTab.Screen
-        name="All notes"
+        name={namesNavigationConstant.bottomTab.all}
         component={MainStackNavigator}
         options={tabMainScreenOption}
       />
       <BottomTab.Screen
-        name="Favorite notes"
+        name={namesNavigationConstant.bottomTab.booked}
         component={BookedStackNavigator}
         options={tabBookedScreenOption}
       />
@@ -70,22 +72,22 @@ function AppDrawer() {
       screenOptions={drawerNavigatorOptions}
     >
       <Drawer.Screen
-        name="Notes"
+        name={namesNavigationConstant.drawer.notes}
         component={Tabs}
         options={drawerPostScreenOptions}
       />
       <Drawer.Screen
-        name="CreateStack"
+        name={namesNavigationConstant.stack.createNote}
         component={CreateScreen}
         options={{...stackNavigatorOptions, ...drawerCreateScreenOptions}}
       />
       <Drawer.Screen
-        name="AboutStack"
+        name={namesNavigationConstant.stack.aboutUs}
         component={AboutScreen}
         options={{...stackNavigatorOptions, ...drawerAboutScreenOptions}}
       />
       <Drawer.Screen
-        name="WeatherStack"
+        name={namesNavigationConstant.stack.weather}
         component={WeatherScreen}
         options={{...stackNavigatorOptions, ...drawerWeatherScreenOptions}}
       />
@@ -100,13 +102,17 @@ export function AppNavigation() {
         screenOptions={{...stackNavigatorOptions, headerShown: false}}
       >
         <Stack.Screen
-          name="Root"
+          name={namesNavigationConstant.stack.root}
           component={AppDrawer}
         />
         <Stack.Screen
           options={{headerShown: true}}
-          name="NoteStack"
+          name={namesNavigationConstant.stack.note}
           component={NoteScreen}/>
+        <Stack.Screen
+          options={{headerShown: true}}
+          name={namesNavigationConstant.stack.privacy}
+          component={PrivacyScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

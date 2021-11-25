@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
-import {StyleSheet, View, Text, Image, Button, ScrollView, Alert} from 'react-native'
+import {StyleSheet, View, Text, Image, ScrollView, Alert} from 'react-native'
 import {THEME} from '../theme'
 import {HeaderButton} from '../components/ui/HeaderButton'
 import {removePost, toggleBooked} from '../store/posts/postsActions'
 import {AppButton} from '../components/ui/AppButton'
+import {namesNavigationConstant} from '../navigation/names-navigation.constans'
+import {noteScreenText} from '../texts/note-screen.text'
 
 export const NoteScreen = ({navigation, route}) => {
   const {allPosts} = useSelector(state => state.posts)
@@ -19,7 +21,7 @@ export const NoteScreen = ({navigation, route}) => {
 
   useEffect(() => {
     navigation.setOptions({
-      title: `Post: ${post?.id} on ${new Date(post?.date).toLocaleDateString()}`,
+      title: post?.title,
       headerRight: () => <HeaderButton
         iconName={post?.booked ? 'star' : 'star-outline'}
         onPress={toggleHandler}/>
@@ -28,17 +30,17 @@ export const NoteScreen = ({navigation, route}) => {
 
   const removeHandler = () => {
     Alert.alert(
-      "Delete post",
-      "Are you sure?",
+      noteScreenText.alertDeleteTitle,
+      noteScreenText.alertDeleteMessage,
       [
         {
-          text: "Cancel",
+          text: noteScreenText.alertCancelBtn,
           style: "cancel",
         },
         {
-          text: "Delete",
+          text: noteScreenText.alertDestructiveBtn,
           onPress: () => {
-            navigation.navigate('MainStack')
+            navigation.navigate(namesNavigationConstant.stack.main)
             dispatch(removePost(postId))
           },
           style: "destructive",
@@ -64,7 +66,7 @@ export const NoteScreen = ({navigation, route}) => {
         color={THEME.DANGER_COLOR}
         onPress={removeHandler}
       >
-        Delete
+        {noteScreenText.deleteBtn}
       </AppButton>
     </ScrollView>
   );

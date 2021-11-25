@@ -2,15 +2,16 @@ import React from 'react'
 import {StyleSheet, View, TouchableOpacity, Text, ImageBackground} from 'react-native'
 import {THEME} from '../../theme'
 import {randomInteger} from '../../helpers/randomInteger'
+import {AppTextBold} from './AppTextBold'
+import {AppText} from './AppText'
+import {AppTextMedium} from './AppTextMedium'
+import {sliceText} from '../../helpers/slice'
 
 const bg = [
-  THEME.MAIN_COLOR_OPACITY,
-  THEME.DANGER_COLOR_OPACITY,
-  THEME.SECOND_COLOR_OPACITY,
-  THEME.GRAY_COLOR_OPACITY,
-  THEME.PINK_COLOR_OPACITY,
   THEME.ORANGE_COLOR_OPACITY,
   THEME.GREEN_COLOR_OPACITY,
+  THEME.GREEN1_COLOR_OPACITY,
+  THEME.GREEN2_COLOR_OPACITY,
 ]
 
 export const AppCard = ({post, onOpen}) => {
@@ -26,9 +27,15 @@ export const AppCard = ({post, onOpen}) => {
       />
       <View style={{...styles.bg, backgroundColor: bg[randomInteger(0, bg.length - 1)]}}/>
       <View style={styles.textWrap}>
-        <Text style={styles.title}>
+        <AppTextBold>
+          {sliceText(post.title, 40)}
+        </AppTextBold>
+        <AppTextMedium style={styles.text}>
+          {sliceText(post.text)}
+        </AppTextMedium>
+        <AppText style={styles.date}>
           {new Date(post.date).toLocaleDateString()}
-        </Text>
+        </AppText>
       </View>
     </TouchableOpacity>
   )
@@ -38,7 +45,7 @@ const styles = StyleSheet.create({
   default: {
     flexDirection: 'row',
     paddingVertical: 30,
-    paddingHorizontal: 16,
+    paddingHorizontal: 18,
     justifyContent: 'space-between',
     alignItems: 'center',
     shadowColor: '#000',
@@ -49,12 +56,12 @@ const styles = StyleSheet.create({
       height: 2
     },
     borderRadius: 10,
-    height: 200,
+    height: 150,
     overflow: 'hidden',
     marginBottom: 16
   },
   image: {
-    opacity: 0.7,
+    opacity: 0.6,
     position: 'absolute',
     left: 0,
     right: 0,
@@ -70,11 +77,16 @@ const styles = StyleSheet.create({
   },
   textWrap: {
     paddingVertical: 5,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '100%'
   },
-  title: {
-    color: '#fff',
-    fontFamily: 'poppins-regular'
+  text: {
+    width: '70%',
+    color: THEME.GRAY_DARK_COLOR
+  },
+  date: {
+    width: '100%',
+    textAlign: 'right',
+    color: THEME.GRAY_DARK_COLOR
   }
 })

@@ -1,26 +1,29 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
+import {StyleSheet} from 'react-native'
 
-import {PostList} from '../components/PostList'
+import {NotesList} from '../components/NotesList'
 import {loadAllPosts} from '../store/actions'
 import {HeaderButton} from '../components/ui/HeaderButton'
 import {Loader} from '../components/ui/Loader'
 import {DrawerAppButton} from '../components/ui/DrawerAppButton'
-import {StyleSheet, Text} from 'react-native'
+import {namesNavigationConstant} from '../navigation/names-navigation.constans'
+import {mainScreenText} from '../texts/main-screen.text'
+import {AppTextMedium} from '../components/ui/AppTextMedium'
 
 export const MainScreen = ({navigation, route}) => {
   const {allPosts, loading} = useSelector(state => state.posts)
   const dispatch = useDispatch()
 
   const openPostHandler = (post) => {
-    navigation.navigate('NoteStack', {
+    navigation.navigate(namesNavigationConstant.stack.note, {
       postId: post.id,
       date: post.date,
     })
   }
 
   const createPostHandler = () => {
-    navigation.getParent().getParent().navigate('CreateStack')
+    navigation.getParent().getParent().navigate(namesNavigationConstant.stack.createNote)
   }
 
   useEffect(()=>{
@@ -29,7 +32,7 @@ export const MainScreen = ({navigation, route}) => {
 
   useEffect(() => {
     navigation.setOptions({
-      headerTitle: 'All Birdy Notes',
+      headerTitle: mainScreenText.screenTitle,
       headerRight: () => <HeaderButton
         title="Take photo"
         iconName="add-circle-outline"
@@ -45,8 +48,8 @@ export const MainScreen = ({navigation, route}) => {
 
   return (
     allPosts.length
-      ? <PostList data={allPosts} onOpen={openPostHandler}/>
-      : <Text style={styles.text}>Don’t have notes 😩</Text>
+      ? <NotesList data={allPosts} onOpen={openPostHandler}/>
+      : <AppTextMedium style={styles.text}>{mainScreenText.notNotes}</AppTextMedium>
   )
 };
 

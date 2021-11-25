@@ -75,7 +75,7 @@ export const stackNavigatorOptions = {
   headerStyle: {
     backgroundColor: '#fff'
   },
-  headerTintColor: THEME.MAIN_COLOR
+  headerTintColor: THEME.BLACK_COLOR
 }
 
 
