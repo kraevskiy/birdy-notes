@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {StyleSheet} from 'react-native'
 
 import {NotesList} from '../components/NotesList'
-import {loadAllPosts} from '../store/actions'
+import {loadAllNotes} from '../store/actions'
 import {HeaderButton} from '../components/ui/HeaderButton'
 import {Loader} from '../components/ui/Loader'
 import {DrawerAppButton} from '../components/ui/DrawerAppButton'
@@ -12,22 +12,21 @@ import {mainScreenText} from '../texts/main-screen.text'
 import {AppTextMedium} from '../components/ui/AppTextMedium'
 
 export const MainScreen = ({navigation, route}) => {
-  const {allPosts, loading} = useSelector(state => state.posts)
+  const {allNotes, loading} = useSelector(state => state.notes)
   const dispatch = useDispatch()
 
-  const openPostHandler = (post) => {
+  const openNoteHandler = (note) => {
     navigation.navigate(namesNavigationConstant.stack.note, {
-      postId: post.id,
-      date: post.date,
+      noteId: note.id
     })
   }
 
-  const createPostHandler = () => {
+  const createNoteHandler = () => {
     navigation.getParent().getParent().navigate(namesNavigationConstant.stack.createNote)
   }
 
   useEffect(()=>{
-    dispatch(loadAllPosts())
+    dispatch(loadAllNotes())
   }, [])
 
   useEffect(() => {
@@ -36,7 +35,7 @@ export const MainScreen = ({navigation, route}) => {
       headerRight: () => <HeaderButton
         title="Take photo"
         iconName="add-circle-outline"
-        onPress={createPostHandler}
+        onPress={createNoteHandler}
       />,
       headerLeft: () => <DrawerAppButton navigation={navigation}/>
     })
@@ -47,8 +46,8 @@ export const MainScreen = ({navigation, route}) => {
   }
 
   return (
-    allPosts.length
-      ? <NotesList data={allPosts} onOpen={openPostHandler}/>
+    allNotes.length
+      ? <NotesList data={allNotes} onOpen={openNoteHandler}/>
       : <AppTextMedium style={styles.text}>{mainScreenText.notNotes}</AppTextMedium>
   )
 };

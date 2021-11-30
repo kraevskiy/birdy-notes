@@ -4,29 +4,29 @@ import {useDispatch, useSelector} from 'react-redux'
 import {StyleSheet, View, Text, Image, ScrollView, Alert} from 'react-native'
 import {THEME} from '../theme'
 import {HeaderButton} from '../components/ui/HeaderButton'
-import {removePost, toggleBooked} from '../store/posts/postsActions'
+import {removeNote, toggleBooked} from '../store/notes/notesActions'
 import {AppButton} from '../components/ui/AppButton'
 import {namesNavigationConstant} from '../navigation/names-navigation.constans'
 import {noteScreenText} from '../texts/note-screen.text'
 
 export const NoteScreen = ({navigation, route}) => {
-  const {allPosts} = useSelector(state => state.posts)
+  const {allNotes} = useSelector(state => state.notes)
   const dispatch = useDispatch()
-  const {postId} = route.params
-  const post = allPosts.find(p => p.id === postId)
+  const {noteId} = route.params
+  const note = allNotes.find(p => p.id === noteId)
 
   const toggleHandler = () => {
-    dispatch(toggleBooked(post))
+    dispatch(toggleBooked(note))
   }
 
   useEffect(() => {
     navigation.setOptions({
-      title: post?.title,
+      title: note?.title,
       headerRight: () => <HeaderButton
-        iconName={post?.booked ? 'star' : 'star-outline'}
+        iconName={note?.booked ? 'star' : 'star-outline'}
         onPress={toggleHandler}/>
     })
-  }, [toggleHandler, navigation, post])
+  }, [toggleHandler, navigation, note])
 
   const removeHandler = () => {
     Alert.alert(
@@ -41,7 +41,7 @@ export const NoteScreen = ({navigation, route}) => {
           text: noteScreenText.alertDestructiveBtn,
           onPress: () => {
             navigation.navigate(namesNavigationConstant.stack.main)
-            dispatch(removePost(postId))
+            dispatch(removeNote(noteId))
           },
           style: "destructive",
         },
@@ -56,10 +56,10 @@ export const NoteScreen = ({navigation, route}) => {
     <ScrollView
       style={styles.wrapper}
     >
-      <Image style={styles.image} source={{uri: post?.img}}/>
+      <Image style={styles.image} source={{uri: note?.img}}/>
       <View style={styles.textWrap}>
         <Text style={styles.title}>
-          {post?.text}
+          {note?.text}
         </Text>
       </View>
       <AppButton

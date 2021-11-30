@@ -14,27 +14,27 @@ const bg = [
   THEME.GREEN2_COLOR_OPACITY,
 ]
 
-export const AppCard = ({post, onOpen}) => {
+export const AppCard = ({note, onOpen}) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      onPress={() => onOpen(post)}
+      onPress={() => onOpen(note)}
       style={styles.default}
     >
       <ImageBackground
         style={styles.image}
-        source={{uri: post.img}}
+        source={{uri: note.img}}
       />
       <View style={{...styles.bg, backgroundColor: bg[randomInteger(0, bg.length - 1)]}}/>
       <View style={styles.textWrap}>
         <AppTextBold>
-          {sliceText(post.title, 40)}
+          {sliceText(note.title, 40)}
         </AppTextBold>
         <AppTextMedium style={styles.text}>
-          {sliceText(post.text)}
+          {sliceText(note.text)}
         </AppTextMedium>
         <AppText style={styles.date}>
-          {new Date(post.date).toLocaleDateString()}
+          {new Date(note.date).toLocaleDateString()}
         </AppText>
       </View>
     </TouchableOpacity>

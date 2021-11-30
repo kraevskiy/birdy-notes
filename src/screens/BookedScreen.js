@@ -9,12 +9,11 @@ import {bookedScreenText} from '../texts/booked-screen.text'
 import {AppTextMedium} from '../components/ui/AppTextMedium'
 
 export const BookedScreen = ({navigation}) => {
-  const {bookedPosts} = useSelector(state => state.posts)
+  const {bookedNotes} = useSelector(state => state.notes)
 
-  const openPostHandler = (post) => {
+  const openNoteHandler = (note) => {
     navigation.navigate(namesNavigationConstant.stack.note, {
-      postId: post.id,
-      date: post.date,
+      noteId: note.id
     })
   }
 
@@ -23,11 +22,11 @@ export const BookedScreen = ({navigation}) => {
       headerTitle: bookedScreenText.screenTitle,
       headerLeft: () => <DrawerAppButton navigation={navigation}/>
     })
-  }, [navigation, bookedPosts])
+  }, [navigation, bookedNotes])
 
   return (
-    bookedPosts.length
-      ? <NotesList data={bookedPosts} onOpen={openPostHandler}/>
+    bookedNotes.length
+      ? <NotesList data={bookedNotes} onOpen={openNoteHandler}/>
       : <AppTextMedium style={styles.text}>{bookedScreenText.notNotes}</AppTextMedium>
   )
 };

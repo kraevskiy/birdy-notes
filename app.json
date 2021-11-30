@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
@@ -29,7 +29,7 @@
     },
     "android": {
       "package": "com.kraevskiyfreelanc.birdy_notes",
-      "versionCode": 1,
+      "versionCode": 3,
       "permissions": [
         "WRITE_EXTERNAL_STORAGE",
         "READ_EXTERNAL_STORAGE",

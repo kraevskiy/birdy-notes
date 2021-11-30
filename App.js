@@ -6,8 +6,6 @@ import {Platform, StatusBar} from 'react-native'
 import {bootstrap} from './src/bootstrap'
 import {AppNavigation} from './src/navigation/AppNavigation'
 import store from './src/store'
-import {THEME} from './src/theme'
-
 
 export default function App() {
   const [isReady, setIsReady] = useState(false)

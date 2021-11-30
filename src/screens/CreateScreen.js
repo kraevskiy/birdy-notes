@@ -11,7 +11,7 @@ import {
 } from 'react-native'
 
 import {THEME} from '../theme'
-import {addPost} from '../store/posts/postsActions'
+import {addNote} from '../store/notes/notesActions'
 import {PhotoPicker} from '../components/PhotoPicker'
 import {DrawerAppButton} from '../components/ui/DrawerAppButton'
 import {AppButton} from '../components/ui/AppButton'
@@ -22,7 +22,7 @@ import {AppTextMedium} from '../components/ui/AppTextMedium'
 export const CreateScreen = ({navigation}) => {
   const [text, setText] = useState('');
   const [title, setTitle] = useState('');
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState(null);
   const inputTitleRef = useRef(null)
   const dispatch = useDispatch()
 
@@ -42,7 +42,7 @@ export const CreateScreen = ({navigation}) => {
       Alert.alert(createScreenText.error)
       inputTitleRef.current.focus()
     } else {
-      const post = {
+      const note = {
         date: new Date().toJSON(),
         text,
         title,
@@ -50,7 +50,7 @@ export const CreateScreen = ({navigation}) => {
         booked: false
       }
       try {
-        await dispatch(addPost(post))
+        await dispatch(addNote(note))
         setText('')
         setTitle('')
         setImage(null)

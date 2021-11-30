@@ -21,7 +21,7 @@ export const AppButton = ({children, onPress, color = THEME.MAIN_COLOR, style = 
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 10,
+    paddingVertical: 13,
     paddingHorizontal: 20,
     borderRadius: 24,
     flexDirection: 'row',

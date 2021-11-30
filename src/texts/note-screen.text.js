@@ -5,4 +5,5 @@ export const noteScreenText = {
   alertCancelBtn: 'Cancel',
   alertDestructiveBtn: 'Delete',
   deleteBtn: 'Delete',
+  updateBtn: 'Update',
 }

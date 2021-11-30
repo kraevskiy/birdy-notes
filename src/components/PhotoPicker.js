@@ -6,7 +6,7 @@ import {THEME} from '../theme'
 import {createScreenText} from '../texts/create-screen.text'
 
 export const PhotoPicker = ({onPick, img}) => {
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState(img)
 
   useEffect(() => {
     (async () => {

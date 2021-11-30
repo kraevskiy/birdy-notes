@@ -16,7 +16,7 @@ export class DB {
     })
   }
 
-  static getPosts() {
+  static getNotes() {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
@@ -29,7 +29,7 @@ export class DB {
     })
   }
 
-  static createPost({text, date, booked, img}) {
+  static createNote({text, date, booked, img}) {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
@@ -43,7 +43,7 @@ export class DB {
     })
   }
 
-  static updatePost(note) {
+  static updateNote(note) {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
@@ -58,7 +58,22 @@ export class DB {
     })
   }
 
-  static removePost (id) {
+  static editNote(note) {
+    return new Promise((resolve, reject) => {
+      db.transaction(tx => {
+        tx.executeSql(
+          `UPDATE notes
+           SET title = ?, text = ?, img = ?, booked = ?, date = ?
+           WHERE id = ?`,
+          [note.title, note.text, note.img, note.booked, note.date, note.id],
+          resolve,
+          (_, error) => reject(error)
+        )
+      })
+    })
+  }
+
+  static removeNote (id) {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(

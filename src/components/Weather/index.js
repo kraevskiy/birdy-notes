@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import {weatherOptions} from './weatherOptions'
-import AnimatedLinearGradient from "./../AnimatedLinearGradient";
+import AnimatedLinearGradient from "./../AnimatedLinearGradient"
 
 export default function ({weather}) {
   const weatherTemp = Math.floor(weather.main.temp)

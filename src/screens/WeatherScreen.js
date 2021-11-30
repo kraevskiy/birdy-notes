@@ -7,53 +7,8 @@ import axios from 'axios'
 import Weather from '../components/Weather'
 import {weatherScreenText} from '../texts/weather-screen.text'
 
-const weatherData = {
-  "base": "stations",
-  "clouds": {
-    "all": 75,
-  },
-  "cod": 200,
-  "coord": {
-    "lat": 50.4385,
-    "lon": 30.5398,
-  },
-  "dt": 1637747749,
-  "id": 703447,
-  "main": {
-    "feels_like": 3.03,
-    "humidity": 81,
-    "pressure": 1018,
-    "temp": 3.03,
-    "temp_max": 3.86,
-    "temp_min": 1.45,
-  },
-  "name": "Kyiv",
-  "sys": {
-    "country": "UA",
-    "id": 2003742,
-    "sunrise": 1637731595,
-    "sunset": 1637762572,
-    "type": 2,
-  },
-  "timezone": 7200,
-  "visibility": 10000,
-  "weather": [
-    {
-      "description": "broken clouds",
-      "icon": "04d",
-      "id": 803,
-      "main": "Clouds",
-    }
-  ],
-  "wind": {
-    "deg": 95,
-    "gust": 1.34,
-    "speed": 0.45,
-  },
-}
-
 export const WeatherScreen = ({navigation}) => {
-  const [weather, setWeather] = useState(weatherData);
+  const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true)
 
   const getApiWeatherUrl = async ({latitude, longitude}) => {
@@ -79,9 +34,13 @@ export const WeatherScreen = ({navigation}) => {
       }
       try {
         const {coords: {latitude, longitude}} = await Location.getCurrentPositionAsync();
-        // const weather = await getApiWeatherUrl({latitude, longitude})
-        // setWeather(weather);
-        setLoading(false);
+        const weather = await getApiWeatherUrl({latitude, longitude})
+        if(weather){
+          setWeather(weather);
+          setLoading(false);
+        } else {
+          Alert.alert(weatherScreenText.errorWeather)
+        }
       } catch (e) {
         console.log(e)
       }

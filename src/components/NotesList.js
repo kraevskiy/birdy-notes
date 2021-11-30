@@ -8,8 +8,8 @@ export const NotesList = ({data, onOpen}) => {
     <View style={styles.wrapper}>
       <FlatList
         data={data}
-        keyExtractor={post => post.id.toString()}
-        renderItem={({item}) => <AppCard post={item} onOpen={onOpen}/>}
+        keyExtractor={note => note.id.toString()}
+        renderItem={({item}) => <AppCard note={item} onOpen={onOpen}/>}
       />
     </View>
   );

@@ -1,1 +1,1 @@
-export * from './posts/postsActions'
+export * from './notes/notesActions'

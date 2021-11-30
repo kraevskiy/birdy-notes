@@ -5,13 +5,13 @@ export const aboutScreenText = {
   text2: 'You can draw upon key insights you’ve already extrapolated, share and discuss those on Birdy Notes with colleagues allowing you to shorten feedback loops, and get more actual work done',
   subtitle: 'OUR BENEFITS:',
   list: [
-    '• To-do list for your work and private taks',
+    '• To-do list for your work and private tasks',
     '• Simple interface that most of the customers find easy to use',
     '• Creating and editing text and image notes',
     '• Automatic note saving',
     '• Share, discuss, and decide in a one birdy notes',
     '• All your loyalty cards in one place',
-    '• Check weather and much your plans with daily forecast',
+    '• Check weather and match your plans with daily forecast',
     '• Mark your favorite notes for quick access',
     '• Never hit a storage limit — add as much content as you want',
     '• Free for personal use'

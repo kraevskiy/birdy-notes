@@ -47,6 +47,12 @@ export const weatherOptions = {
     title: 'Not a damn thing in the fog ',
     subtitle: 'But like in Silent Hill :)'
   },
+  Fog: {
+    iconName: 'weather-fog',
+    gradient: ['#606c88', '#3f4c6b'],
+    title: 'Not a damn thing in the fog ',
+    subtitle: 'But like in Silent Hill :)'
+  },
   Clear: {
     iconName: 'weather-sunny',
     gradient: ['#56CCF2', '#2F80ED'],
